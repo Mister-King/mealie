@@ -69,10 +69,14 @@ class UserBase(CamelModel):
             "admin": "false",
         }
 
+class UserFullName(CamelModel):
+    full_name: str
+    
+    class Config:
+            orm_mode = True
 
 class UserIn(UserBase):
     password: str
-
 
 class UserOut(UserBase):
     id: int

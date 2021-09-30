@@ -32,7 +32,7 @@
 
 <script>
 import { api } from "@/api";
-
+import { user } from "@/mixins/user";
 import RecipeEditor from "@/components/Recipe/RecipeEditor";
 import RecipePageActionMenu from "@/components/Recipe/RecipePageActionMenu";
 export default {
@@ -41,6 +41,7 @@ export default {
     RecipeEditor,
     RecipePageActionMenu,
   },
+  mixins: [ user ],
   data() {
     return {
       isLoading: false,
@@ -103,6 +104,9 @@ export default {
         if (this.fileObject) {
           this.recipeDetails.image = this.fileObject.name;
         }
+
+        this.recipeDetails.createdById = this.user.id;
+
         let slug = await api.recipes.create(this.recipeDetails);
 
         if (this.fileObject) {

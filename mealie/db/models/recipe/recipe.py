@@ -24,6 +24,7 @@ class RecipeModel(SqlAlchemyBase, BaseMixins):
     id = sa.Column(sa.Integer, primary_key=True)
 
     # General Recipe Properties
+    created_by_id = sa.Column(sa.Integer)
     name = sa.Column(sa.String, nullable=False)
     description = sa.Column(sa.String)
     image = sa.Column(sa.String)
@@ -82,6 +83,7 @@ class RecipeModel(SqlAlchemyBase, BaseMixins):
     def __init__(
         self,
         session,
+        created_by_id: int = None,
         name: str = None,
         description: str = None,
         image: str = None,
@@ -107,6 +109,7 @@ class RecipeModel(SqlAlchemyBase, BaseMixins):
         settings: dict = None,
         **_
     ) -> None:
+        self.created_by_id = created_by_id
         self.name = name
         self.description = description
         self.image = image

@@ -22,7 +22,7 @@
       <v-tooltip bottom color="info">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            v-if="loggedIn"
+            v-if="loggedIn && createdByMe"
             fab
             small
             class="mx-1"
@@ -37,6 +37,7 @@
         <span>{{ $t("general.edit") }}</span>
       </v-tooltip>
       <ContextMenu
+        class="context-menu"
         show-print
         :menu-top="false"
         :slug="slug"
@@ -88,6 +89,10 @@ export default {
       default: false,
     },
     loggedIn: {
+      type: Boolean,
+      default: false,
+    },
+    createdByMe: {
       type: Boolean,
       default: false,
     },
@@ -181,5 +186,13 @@ export default {
 
 .fixed-bar-mobile {
   top: 1.5em !important;
+}
+
+.context-menu {
+  margin-left: 4px;
+}
+
+button + .context-menu {
+  margin-left: 0;
 }
 </style>

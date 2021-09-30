@@ -10,7 +10,7 @@ from mealie.db.database import db
 from mealie.db.db_setup import generate_session
 from mealie.routes.deps import get_current_user
 from mealie.routes.routers import AdminAPIRouter, UserAPIRouter
-from mealie.schema.user import ChangePassword, UserBase, UserFavorites, UserIn, UserInDB, UserOut
+from mealie.schema.user import ChangePassword, UserBase, UserFavorites, UserIn, UserInDB, UserOut, UserFullName
 from mealie.services.events import create_user_event
 from sqlalchemy.orm.session import Session
 
@@ -54,6 +54,13 @@ async def get_logged_in_user(
 ):
     return current_user.dict()
 
+
+@user_router.get("/fullname/{id}", response_model=UserFullName)
+async def get_user_fullname_by_id(
+    id: int,
+    session: Session = Depends(generate_session),
+):
+    return db.users.get(session, id, override_schema=UserFullName)
 
 @admin_router.get("/{id}", response_model=UserOut)
 async def get_user_by_id(

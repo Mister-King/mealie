@@ -81,6 +81,7 @@ export const API_ROUTES = {
   themesId: id => `${prefix}/themes/${id}`,
   usersApiTokensTokenId: token_id => `${prefix}/users/api-tokens/${token_id}`,
   usersId: id => `${prefix}/users/${id}`,
+  usersFullName: id => `${prefix}/users/fullname/${id}`,
   usersIdFavorites: id => `${prefix}/users/${id}/favorites`,
   usersIdFavoritesSlug: (id, slug) => `${prefix}/users/${id}/favorites/${slug}`,
   usersIdImage: id => `${prefix}/users/${id}/image`,

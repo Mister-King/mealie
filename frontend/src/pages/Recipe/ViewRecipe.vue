@@ -26,6 +26,7 @@
         :name="recipeDetails.name"
         v-model="form"
         :logged-in="loggedIn"
+        :createdByMe="createdByMe"
         :open="showIcons"
         @close="form = false"
         @json="jsonEditor = !jsonEditor"
@@ -38,7 +39,7 @@
         class="ml-auto"
       />
 
-      <RecipeViewer v-if="!form" :recipe="recipeDetails" />
+      <RecipeViewer v-if="!form" :recipe="recipeDetails" :author="author"/>
       <VJsoneditor
         @error="logError()"
         class="mt-10"
@@ -126,6 +127,7 @@ export default {
         rating: 0,
       },
       imageKey: 1,
+      author: "",
     };
   },
 
@@ -149,6 +151,9 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.getters.getIsLoggedIn;
+    },
+    createdByMe() {
+      return this.user.id === this.recipeDetails.createdById;
     },
     isMobile() {
       return this.$vuetify.breakpoint.name === "xs";
@@ -201,6 +206,10 @@ export default {
 
       this.recipeDetails = response.data;
       this.skeleton = false;
+
+      // Get author details
+      const author = await api.users.getFullname(this.recipeDetails.createdById);
+      this.author = author ? author.fullName : null;
     },
     getImage(slug) {
       if (slug) {
