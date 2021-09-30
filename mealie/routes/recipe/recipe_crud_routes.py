@@ -63,6 +63,8 @@ def parse_recipe_url(
     """ Takes in a URL and attempts to scrape data and load it into the database """
 
     recipe = create_from_url(url.url)
+    recipe.created_by_id = current_user.id
+
     recipe: Recipe = db.recipes.create(session, recipe.dict())
 
     background_tasks.add_task(

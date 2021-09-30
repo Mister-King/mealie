@@ -119,7 +119,7 @@ class RecipeSummary(CamelModel):
 
 
 class Recipe(RecipeSummary):
-    created_by_id: int
+    created_by_id: Optional[int] = None
     recipe_yield: Optional[str]
     recipe_ingredient: Optional[list[RecipeIngredient]]
     recipe_instructions: Optional[list[RecipeStep]]
