@@ -3,7 +3,7 @@
     <v-card-title class="headline">
       {{ recipe.name }}
     </v-card-title>
-    <v-card-subtitle v-if="loggedIn">
+    <v-card-subtitle v-if="loggedIn && author">
       Created by: {{ author }}
     </v-card-subtitle>
     <v-card-text>
