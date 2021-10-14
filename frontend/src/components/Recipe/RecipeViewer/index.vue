@@ -3,7 +3,7 @@
     <v-card-title class="headline">
       {{ recipe.name }}
     </v-card-title>
-    <v-card-subtitle>
+    <v-card-subtitle v-if="loggedIn">
       Created by: {{ author }}
     </v-card-subtitle>
     <v-card-text>
@@ -112,6 +112,7 @@ export default {
   props: {
     recipe: Object,
     author: String,
+    loggedIn: Boolean,
   },
   data() {
     return {

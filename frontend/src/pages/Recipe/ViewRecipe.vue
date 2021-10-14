@@ -39,7 +39,7 @@
         class="ml-auto"
       />
 
-      <RecipeViewer v-if="!form" :recipe="recipeDetails" :author="author"/>
+      <RecipeViewer v-if="!form" :recipe="recipeDetails" :loggedIn="loggedIn" :author="author"/>
       <VJsoneditor
         @error="logError()"
         class="mt-10"
@@ -57,7 +57,7 @@
       />
     </v-card>
     <CommentsSection
-      v-if="recipeDetails.settings && !recipeDetails.settings.disableComments"
+      v-if="recipeDetails.settings && !recipeDetails.settings.disableComments && loggedIn"
       class="mt-2 d-print-none"
       :slug="recipeDetails.slug"
       :comments="recipeDetails.comments"
