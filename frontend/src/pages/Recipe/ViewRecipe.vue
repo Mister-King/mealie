@@ -208,8 +208,10 @@ export default {
       this.skeleton = false;
 
       // Get author details
-      const author = await api.users.getFullname(this.recipeDetails.createdById);
-      this.author = author ? author.fullName : null;
+      if (this.loggedIn) {
+        const author = await api.users.getFullname(this.recipeDetails.createdById);
+        this.author = author ? author.fullName : null;
+      }
     },
     getImage(slug) {
       if (slug) {
