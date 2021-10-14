@@ -27,6 +27,7 @@
         v-model="form"
         :logged-in="loggedIn"
         :createdByMe="createdByMe"
+        :isAdmin="isAdmin"
         :open="showIcons"
         @close="form = false"
         @json="jsonEditor = !jsonEditor"
@@ -111,6 +112,7 @@ export default {
       },
       // Recipe Details //
       recipeDetails: {
+        createdById: "",
         name: "",
         description: "",
         image: "",
@@ -151,6 +153,9 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.getters.getIsLoggedIn;
+    },
+    isAdmin() {
+      return this.user.admin;
     },
     createdByMe() {
       return this.user.id === this.recipeDetails.createdById;
@@ -208,7 +213,7 @@ export default {
       this.skeleton = false;
 
       // Get author details
-      if (this.loggedIn) {
+      if (this.loggedIn && this.recipeDetails.createdById) {
         const author = await api.users.getFullname(this.recipeDetails.createdById);
         this.author = author ? author.fullName : null;
       }

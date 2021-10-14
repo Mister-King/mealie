@@ -22,7 +22,7 @@
       <v-tooltip bottom color="info">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            v-if="loggedIn && createdByMe"
+            v-if="loggedIn && createdByMe || isAdmin"
             fab
             small
             class="mx-1"
@@ -93,6 +93,10 @@ export default {
       default: false,
     },
     createdByMe: {
+      type: Boolean,
+      default: false,
+    },
+    isAdmin: {
       type: Boolean,
       default: false,
     },

@@ -66,6 +66,7 @@
               :rating="recipe.rating"
               :image="recipe.image"
               :tags="recipe.tags"
+              :createdById="recipe.createdById"
             />
           </v-lazy>
         </v-col>
@@ -88,6 +89,7 @@
               :rating="recipe.rating"
               :image="recipe.image"
               :tags="recipe.tags"
+              :createdById="recipe.createdById"
             />
           </v-lazy>
         </v-col>

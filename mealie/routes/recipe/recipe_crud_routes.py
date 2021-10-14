@@ -184,10 +184,13 @@ def delete_recipe(
 ):
     """ Deletes a recipe by slug """
 
-    try:
-        recipe: Recipe = db.recipes.delete(session, recipe_slug)
-        delete_assets(recipe_slug=recipe_slug)
-    except Exception:
+    if recipe.created_by_id == current_user.id or current_user.admin:
+        try:
+            recipe: Recipe = db.recipes.delete(session, recipe_slug)
+            delete_assets(recipe_slug=recipe_slug)
+        except Exception:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST)
+    else:
         raise HTTPException(status.HTTP_400_BAD_REQUEST)
 
     background_tasks.add_task(
