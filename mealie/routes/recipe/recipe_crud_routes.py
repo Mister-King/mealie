@@ -184,6 +184,11 @@ def delete_recipe(
 ):
     """ Deletes a recipe by slug """
 
+    recipe: Recipe = db.recipes.get(session, recipe_slug)
+    
+    if not recipe:
+        raise HTTPException(status.HTTP_404_NOT_FOUND)
+
     if recipe.created_by_id == current_user.id or current_user.admin:
         try:
             recipe: Recipe = db.recipes.delete(session, recipe_slug)
