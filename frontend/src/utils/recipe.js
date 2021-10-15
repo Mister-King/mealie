@@ -18,7 +18,7 @@ export const recipe = {
     list.sort((a, b) => (a.dateUpdated > b.dateUpdated ? -1 : 1));
   },
   sortByRating(list) {
-    list.sort((a, b) => (a.rating > b.rating ? -1 : 1));
+    list.sort((a, b) => (this.getAverageRating(JSON.parse(a.ratings)) > this.getAverageRating(JSON.parse(b.ratings)) ? -1 : 1));
   },
   /**
    *
