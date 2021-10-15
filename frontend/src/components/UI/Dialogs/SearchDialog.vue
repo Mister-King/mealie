@@ -49,6 +49,7 @@
         <div v-else>
           <MobileRecipeCard
             v-for="(recipe, index) in results.slice(0, 10)"
+            :id="recipe.id"
             :tabindex="index"
             :key="index"
             class="ma-1 arrow-nav"

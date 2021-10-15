@@ -13,6 +13,7 @@
       <div v-if="todaysMeal">
         <v-subheader>{{ $t("meal-plan.dinner-tonight") }}</v-subheader>
         <MobileRecipeCard
+          :id="todaysMeal.id"
           :name="todaysMeal.name"
           :slug="todaysMeal.slug"
           :description="todaysMeal.description"

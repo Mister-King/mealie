@@ -2,6 +2,7 @@
   <div>
     <v-card-title class="headline">
       {{ recipe.name }}
+      <AverageRating :id="recipe.id" :slug="recipe.slug" :ratings="JSON.parse(recipe.ratings)" />
     </v-card-title>
     <v-card-subtitle v-if="loggedIn && author">
       Created by: {{ author }}
@@ -98,6 +99,7 @@ import Notes from "@/components/Recipe/Parts/Notes";
 import Ingredients from "@/components/Recipe/Parts/Ingredients";
 import Instructions from "@/components/Recipe/Parts/Instructions.vue";
 import Assets from "../Parts/Assets.vue";
+import AverageRating from "@/components/Recipe/Parts/AverageRating";
 export default {
   components: {
     VueMarkdown,
@@ -108,6 +110,7 @@ export default {
     Instructions,
     Assets,
     Rating,
+    AverageRating,
   },
   props: {
     recipe: Object,

@@ -22,9 +22,7 @@ import {user} from "@/mixins/user";
 export default {
   mixins: [ user ],
   props: {
-    emitOnly: {
-      default: false,
-    },
+    id: Number,
     name: String,
     slug: String,
     ratings: Array,
@@ -80,6 +78,8 @@ export default {
         slug: this.slug,
         ratings: JSON.stringify(updatedRatings),
       });
+
+      this.$root.$emit(`updateRatings-${this.id}`, updatedRatings);
     },
   },
 };

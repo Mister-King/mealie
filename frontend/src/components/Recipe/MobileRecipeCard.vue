@@ -23,6 +23,7 @@
           <v-list-item-title class=" mb-1">{{ name }} </v-list-item-title>
           <v-list-item-subtitle> {{ description }} </v-list-item-subtitle>
           <div class="d-flex justify-center align-center">
+            <AverageRating :id="id" :slug="slug" :small="true" :ratings="ratings" />
             <FavoriteBadge v-if="loggedIn" :slug="slug" show-always />
             <v-spacer></v-spacer>
             <ContextMenu :slug="slug" :menu-icon="$globals.icons.dotsHorizontal" :name="name" :createdByMe="createdByMe" :isAdmin="isAdmin" />
@@ -36,15 +37,18 @@
 <script>
 import FavoriteBadge from "@/components/Recipe/FavoriteBadge";
 import ContextMenu from "@/components/Recipe/ContextMenu";
+import AverageRating from "@/components/Recipe/Parts/AverageRating";
 import { api } from "@/api";
 import {user} from "@/mixins/user";
 export default {
   components: {
     FavoriteBadge,
     ContextMenu,
+    AverageRating,
   },
   mixins: [user],
   props: {
+    id: Number,
     createdById: Number,
     name: String,
     slug: String,

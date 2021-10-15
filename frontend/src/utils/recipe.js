@@ -36,6 +36,17 @@ export const recipe = {
       swap(list, n, --last);
     }
   },
+  getAverageRating(ratings) {
+    if (ratings?.length < 1) {
+      return 0;
+    }
+
+    const objAverage = ratings.reduce((prev, current) => {
+      return { rating: prev.rating + current.rating }
+    });
+
+    return objAverage.rating / ratings.length;
+  },
 };
 
 const rand = n =>

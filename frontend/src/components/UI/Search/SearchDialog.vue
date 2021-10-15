@@ -23,6 +23,7 @@
           <div v-for="recipe in searchResults.slice(0, 7)" :key="recipe.name">
             <MobileRecipeCard
               class="ma-1 px-0"
+              :id="recipe.id"
               :name="recipe.item.name"
               :description="recipe.item.description"
               :slug="recipe.item.slug"
