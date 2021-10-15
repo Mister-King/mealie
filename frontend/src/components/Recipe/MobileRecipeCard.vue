@@ -24,15 +24,6 @@
           <v-list-item-subtitle> {{ description }} </v-list-item-subtitle>
           <div class="d-flex justify-center align-center">
             <FavoriteBadge v-if="loggedIn" :slug="slug" show-always />
-            <v-rating
-              color="secondary"
-              class="ml-auto"
-              background-color="secondary lighten-3"
-              dense
-              length="5"
-              size="15"
-              :value="rating"
-            ></v-rating>
             <v-spacer></v-spacer>
             <ContextMenu :slug="slug" :menu-icon="$globals.icons.dotsHorizontal" :name="name" :createdByMe="createdByMe" :isAdmin="isAdmin" />
           </div>

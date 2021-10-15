@@ -22,7 +22,6 @@
           <v-text-field :label="$t('recipe.servings')" v-model="value.recipeYield" class="rounded-sm"> </v-text-field>
         </v-col>
         <v-spacer></v-spacer>
-        <Rating v-model="value.rating" :emit-only="true" />
       </v-row>
       <v-row>
         <v-col cols="12" sm="12" md="4" lg="4">
@@ -94,7 +93,6 @@ import Ingredients from "@/components/Recipe/Parts/Ingredients";
 import Assets from "@/components/Recipe/Parts/Assets.vue";
 import Notes from "@/components/Recipe/Parts/Notes.vue";
 import SettingsMenu from "@/components/Recipe/Parts/Helpers/SettingsMenu.vue";
-import Rating from "@/components/Recipe/Parts/Rating";
 export default {
   components: {
     BulkAdd,
@@ -107,7 +105,6 @@ export default {
     Assets,
     Notes,
     SettingsMenu,
-    Rating,
   },
   props: {
     value: Object,
