@@ -37,7 +37,7 @@ export const recipe = {
     }
   },
   getAverageRating(ratings) {
-    if (ratings?.length < 1) {
+    if (!ratings?.length > 0) {
       return 0;
     }
 
