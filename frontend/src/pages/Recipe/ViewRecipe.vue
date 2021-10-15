@@ -26,6 +26,8 @@
         :name="recipeDetails.name"
         v-model="form"
         :logged-in="loggedIn"
+        :createdByMe="createdByMe"
+        :isAdmin="isAdmin"
         :open="showIcons"
         @close="form = false"
         @json="jsonEditor = !jsonEditor"
@@ -38,7 +40,7 @@
         class="ml-auto"
       />
 
-      <RecipeViewer v-if="!form" :recipe="recipeDetails" />
+      <RecipeViewer v-if="!form" :recipe="recipeDetails" :loggedIn="loggedIn" :author="author"/>
       <VJsoneditor
         @error="logError()"
         class="mt-10"
@@ -56,7 +58,7 @@
       />
     </v-card>
     <CommentsSection
-      v-if="recipeDetails.settings && !recipeDetails.settings.disableComments"
+      v-if="recipeDetails.settings && !recipeDetails.settings.disableComments && loggedIn"
       class="mt-2 d-print-none"
       :slug="recipeDetails.slug"
       :comments="recipeDetails.comments"
@@ -110,6 +112,7 @@ export default {
       },
       // Recipe Details //
       recipeDetails: {
+        createdById: "",
         name: "",
         description: "",
         image: "",
@@ -126,6 +129,7 @@ export default {
         rating: 0,
       },
       imageKey: 1,
+      author: "",
     };
   },
 
@@ -149,6 +153,12 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.getters.getIsLoggedIn;
+    },
+    isAdmin() {
+      return this.user.admin;
+    },
+    createdByMe() {
+      return this.user.id === this.recipeDetails.createdById;
     },
     isMobile() {
       return this.$vuetify.breakpoint.name === "xs";
@@ -201,6 +211,12 @@ export default {
 
       this.recipeDetails = response.data;
       this.skeleton = false;
+
+      // Get author details
+      if (this.loggedIn && this.recipeDetails.createdById) {
+        const author = await api.users.getFullname(this.recipeDetails.createdById);
+        this.author = author ? author.fullName : null;
+      }
     },
     getImage(slug) {
       if (slug) {

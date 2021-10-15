@@ -27,7 +27,7 @@
         <Rating :value="rating" :name="name" :slug="slug" :small="true" />
         <v-spacer></v-spacer>
         <RecipeChips :truncate="true" :items="tags" :title="false" :limit="2" :small="true" :isCategory="false" />
-        <ContextMenu :slug="slug" :name="name" />
+        <ContextMenu :slug="slug" :name="name" :createdByMe="createdByMe" :isAdmin="isAdmin" />
       </v-card-actions>
     </v-card>
   </v-hover>
@@ -40,14 +40,17 @@ import ContextMenu from "@/components/Recipe/ContextMenu";
 import CardImage from "@/components/Recipe/CardImage";
 import Rating from "@/components/Recipe/Parts/Rating";
 import { api } from "@/api";
+import { user } from "@/mixins/user";
 export default {
   components: { FavoriteBadge, RecipeChips, ContextMenu, Rating, CardImage },
+  mixins: [user],
   props: {
     name: String,
     slug: String,
     description: String,
     rating: Number,
     image: String,
+    createdById: Number,
 
     route: {
       default: true,
@@ -64,6 +67,12 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.getters.getIsLoggedIn;
+    },
+    isAdmin() {
+      return this.user.admin;
+    },
+    createdByMe() {
+      return this.user.id === this.createdById;
     },
   },
   methods: {

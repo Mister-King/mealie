@@ -93,6 +93,7 @@ class RecipeIngredient(CamelModel):
 
 
 class RecipeSummary(CamelModel):
+    created_by_id: Optional[int] = None
     id: Optional[int]
     name: Optional[str]
     slug: str = ""
@@ -119,6 +120,7 @@ class RecipeSummary(CamelModel):
 
 
 class Recipe(RecipeSummary):
+    created_by_id: Optional[int] = None
     recipe_yield: Optional[str]
     recipe_ingredient: Optional[list[RecipeIngredient]]
     recipe_instructions: Optional[list[RecipeStep]]

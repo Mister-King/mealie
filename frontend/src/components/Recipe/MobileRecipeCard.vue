@@ -34,7 +34,7 @@
               :value="rating"
             ></v-rating>
             <v-spacer></v-spacer>
-            <ContextMenu :slug="slug" :menu-icon="$globals.icons.dotsHorizontal" :name="name" />
+            <ContextMenu :slug="slug" :menu-icon="$globals.icons.dotsHorizontal" :name="name" :createdByMe="createdByMe" :isAdmin="isAdmin" />
           </div>
         </v-list-item-content>
       </v-list-item>
@@ -46,12 +46,15 @@
 import FavoriteBadge from "@/components/Recipe/FavoriteBadge";
 import ContextMenu from "@/components/Recipe/ContextMenu";
 import { api } from "@/api";
+import {user} from "@/mixins/user";
 export default {
   components: {
     FavoriteBadge,
     ContextMenu,
   },
+  mixins: [user],
   props: {
+    createdById: Number,
     name: String,
     slug: String,
     description: String,
@@ -77,6 +80,12 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.getters.getIsLoggedIn;
+    },
+    isAdmin() {
+      return this.user.admin;
+    },
+    createdByMe() {
+      return this.user.id === this.createdById;
     },
   },
 };

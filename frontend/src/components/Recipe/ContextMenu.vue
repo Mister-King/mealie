@@ -75,6 +75,14 @@ export default {
       type: Boolean,
       default: true,
     },
+    createdByMe: {
+      type: Boolean,
+      default: false,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     effMenuIcon() {
@@ -131,7 +139,7 @@ export default {
     },
     displayedMenu() {
       let menu = this.defaultMenu;
-      if (this.loggedIn && this.cardMenu) {
+      if ((this.loggedIn && this.cardMenu && this.createdByMe) || (this.loggedIn && this.cardMenu && this.isAdmin)) {
         menu = [...this.userMenu, ...menu];
       }
       if (this.showPrint) {

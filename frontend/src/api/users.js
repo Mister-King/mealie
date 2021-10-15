@@ -31,6 +31,10 @@ export const userAPI = {
     let response = await apiReq.get(API_ROUTES.usersId(id));
     return response.data;
   },
+  async getFullname(id) {
+    let response = await apiReq.get(API_ROUTES.usersFullName(id));
+    return response.data;
+  },
   update(user) {
     return apiReq.put(
       API_ROUTES.usersId(user.id),

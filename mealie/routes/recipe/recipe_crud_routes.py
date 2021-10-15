@@ -63,6 +63,8 @@ def parse_recipe_url(
     """ Takes in a URL and attempts to scrape data and load it into the database """
 
     recipe = create_from_url(url.url)
+    recipe.created_by_id = current_user.id
+
     recipe: Recipe = db.recipes.create(session, recipe.dict())
 
     background_tasks.add_task(
@@ -182,10 +184,18 @@ def delete_recipe(
 ):
     """ Deletes a recipe by slug """
 
-    try:
-        recipe: Recipe = db.recipes.delete(session, recipe_slug)
-        delete_assets(recipe_slug=recipe_slug)
-    except Exception:
+    recipe: Recipe = db.recipes.get(session, recipe_slug)
+    
+    if not recipe:
+        raise HTTPException(status.HTTP_404_NOT_FOUND)
+
+    if recipe.created_by_id == current_user.id or current_user.admin:
+        try:
+            recipe: Recipe = db.recipes.delete(session, recipe_slug)
+            delete_assets(recipe_slug=recipe_slug)
+        except Exception:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST)
+    else:
         raise HTTPException(status.HTTP_400_BAD_REQUEST)
 
     background_tasks.add_task(

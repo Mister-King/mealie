@@ -3,6 +3,9 @@
     <v-card-title class="headline">
       {{ recipe.name }}
     </v-card-title>
+    <v-card-subtitle v-if="loggedIn && author">
+      Created by: {{ author }}
+    </v-card-subtitle>
     <v-card-text>
       <vue-markdown :source="recipe.description"> </vue-markdown>
       <v-row dense disabled>
@@ -108,6 +111,8 @@ export default {
   },
   props: {
     recipe: Object,
+    author: String,
+    loggedIn: Boolean,
   },
   data() {
     return {
