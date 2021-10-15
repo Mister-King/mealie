@@ -60,10 +60,11 @@
         <v-col :sm="6" :md="6" :lg="4" :xl="3" v-for="recipe in recipes.slice(0, cardLimit)" :key="recipe.name">
           <v-lazy>
             <RecipeCard
+              :id="recipe.id"
               :name="recipe.name"
               :description="recipe.description"
               :slug="recipe.slug"
-              :rating="recipe.rating"
+              :ratings="JSON.parse(recipe.ratings)"
               :image="recipe.image"
               :tags="recipe.tags"
               :createdById="recipe.createdById"
@@ -83,10 +84,11 @@
         >
           <v-lazy>
             <MobileRecipeCard
+              :id="recipe.id"
               :name="recipe.name"
               :description="recipe.description"
               :slug="recipe.slug"
-              :rating="recipe.rating"
+              :ratings="JSON.parse(recipe.ratings)"
               :image="recipe.image"
               :tags="recipe.tags"
               :createdById="recipe.createdById"

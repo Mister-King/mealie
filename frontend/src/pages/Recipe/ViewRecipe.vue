@@ -126,7 +126,7 @@ export default {
         categories: [],
         dateAdded: "",
         notes: [],
-        rating: 0,
+        ratings: [],
       },
       imageKey: 1,
       author: "",

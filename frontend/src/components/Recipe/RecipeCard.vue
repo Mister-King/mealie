@@ -23,8 +23,9 @@
       </v-card-title>
 
       <v-card-actions>
+        <AverageRating :id="id" :slug="slug" :ratings="ratings" :card="true" />
         <FavoriteBadge v-if="loggedIn" :slug="slug" show-always />
-        <Rating :value="rating" :name="name" :slug="slug" :small="true" />
+        <Rating v-if="loggedIn" :id="id" :ratings="ratings" :name="name" :slug="slug" :small="true" />
         <v-spacer></v-spacer>
         <RecipeChips :truncate="true" :items="tags" :title="false" :limit="2" :small="true" :isCategory="false" />
         <ContextMenu :slug="slug" :name="name" :createdByMe="createdByMe" :isAdmin="isAdmin" />
@@ -39,18 +40,20 @@ import RecipeChips from "@/components/Recipe/RecipeViewer/RecipeChips";
 import ContextMenu from "@/components/Recipe/ContextMenu";
 import CardImage from "@/components/Recipe/CardImage";
 import Rating from "@/components/Recipe/Parts/Rating";
+import AverageRating from "@/components/Recipe/Parts/AverageRating";
 import { api } from "@/api";
 import { user } from "@/mixins/user";
 export default {
-  components: { FavoriteBadge, RecipeChips, ContextMenu, Rating, CardImage },
+  components: {AverageRating, FavoriteBadge, RecipeChips, ContextMenu, Rating, CardImage },
   mixins: [user],
   props: {
+    id: Number,
+    createdById: Number,
     name: String,
     slug: String,
     description: String,
-    rating: Number,
+    ratings: Array,
     image: String,
-    createdById: Number,
 
     route: {
       default: true,

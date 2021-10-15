@@ -102,7 +102,7 @@ class RecipeSummary(CamelModel):
     description: Optional[str]
     recipe_category: Optional[list[str]] = []
     tags: Optional[list[str]] = []
-    rating: Optional[int]
+    ratings: Optional[str] = None
 
     date_added: Optional[datetime.date]
     date_updated: Optional[datetime.datetime]

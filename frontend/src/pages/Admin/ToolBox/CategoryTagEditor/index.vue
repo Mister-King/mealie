@@ -24,11 +24,12 @@
         <MobileRecipeCard
           class="ml-2 mr-2 mt-2 mb-2"
           v-for="recipe in renameTarget.recipes"
+          :id="recipe.id"
           :key="recipe.slug"
           :slug="recipe.slug"
           :name="recipe.name"
           :description="recipe.description"
-          :rating="recipe.rating"
+          :ratings="JSON.parse(recipe.ratings)"
           :route="false"
           :tags="recipe.tags"
         />

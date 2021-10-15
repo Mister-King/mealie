@@ -49,13 +49,14 @@
         <div v-else>
           <MobileRecipeCard
             v-for="(recipe, index) in results.slice(0, 10)"
+            :id="recipe.id"
             :tabindex="index"
             :key="index"
             class="ma-1 arrow-nav"
             :name="recipe.name"
             :description="recipe.description"
             :slug="recipe.slug"
-            :rating="recipe.rating"
+            :ratings="JSON.parse(recipe.ratings)"
             :image="recipe.image"
             :route="true"
             v-on="$listeners.selected ? { selected: () => grabRecipe(recipe) } : {}"
