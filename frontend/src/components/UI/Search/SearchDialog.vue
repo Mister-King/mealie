@@ -26,7 +26,7 @@
               :name="recipe.item.name"
               :description="recipe.item.description"
               :slug="recipe.item.slug"
-              :rating="recipe.item.rating"
+              :ratings="JSON.parse(recipe.item.ratings)"
               :image="recipe.item.image"
               :route="true"
               @selected="dialog = false"

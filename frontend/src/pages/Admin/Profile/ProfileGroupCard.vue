@@ -16,7 +16,7 @@
           :name="todaysMeal.name"
           :slug="todaysMeal.slug"
           :description="todaysMeal.description"
-          :rating="todaysMeal.rating"
+          :ratings="JSON.parse(todaysMeal.ratings)"
           :tags="true"
         />
       </div>

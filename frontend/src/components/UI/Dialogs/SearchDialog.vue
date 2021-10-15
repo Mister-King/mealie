@@ -55,7 +55,7 @@
             :name="recipe.name"
             :description="recipe.description"
             :slug="recipe.slug"
-            :rating="recipe.rating"
+            :ratings="JSON.parse(recipe.ratings)"
             :image="recipe.image"
             :route="true"
             v-on="$listeners.selected ? { selected: () => grabRecipe(recipe) } : {}"

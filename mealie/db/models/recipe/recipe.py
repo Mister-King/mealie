@@ -63,7 +63,7 @@ class RecipeModel(SqlAlchemyBase, BaseMixins):
     settings = orm.relationship("RecipeSettings", uselist=False, cascade="all, delete-orphan")
     tags: list[Tag] = orm.relationship("Tag", secondary=recipes2tags, back_populates="recipes")
     notes: list[Note] = orm.relationship("Note", cascade="all, delete-orphan")
-    rating = sa.Column(sa.Integer)
+    ratings = sa.Column(sa.String)
     org_url = sa.Column(sa.String)
     extras: list[ApiExtras] = orm.relationship("ApiExtras", cascade="all, delete-orphan")
 
@@ -102,7 +102,7 @@ class RecipeModel(SqlAlchemyBase, BaseMixins):
         tags: list[str] = None,
         date_added: datetime.date = None,
         notes: list[dict] = None,
-        rating: int = None,
+        ratings: str = None,
         org_url: str = None,
         extras: dict = None,
         assets: list = None,
@@ -138,7 +138,7 @@ class RecipeModel(SqlAlchemyBase, BaseMixins):
         self.tags = [Tag.create_if_not_exist(session=session, name=tag) for tag in tags]
         self.slug = slug
         self.notes = [Note(**note) for note in notes]
-        self.rating = rating
+        self.ratings = ratings
         self.org_url = org_url
         self.extras = [ApiExtras(key=key, value=value) for key, value in extras.items()]
 

@@ -58,7 +58,7 @@ export default {
     name: String,
     slug: String,
     description: String,
-    rating: Number,
+    ratings: Array,
     image: String,
     route: {
       default: true,

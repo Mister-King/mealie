@@ -24,7 +24,7 @@
 
       <v-card-actions>
         <FavoriteBadge v-if="loggedIn" :slug="slug" show-always />
-        <Rating :value="rating" :name="name" :slug="slug" :small="true" />
+        <Rating v-if="loggedIn" :id="id" :ratings="ratings" :name="name" :slug="slug" :small="true" />
         <v-spacer></v-spacer>
         <RecipeChips :truncate="true" :items="tags" :title="false" :limit="2" :small="true" :isCategory="false" />
         <ContextMenu :slug="slug" :name="name" :createdByMe="createdByMe" :isAdmin="isAdmin" />
@@ -48,7 +48,7 @@ export default {
     name: String,
     slug: String,
     description: String,
-    rating: Number,
+    ratings: Array,
     image: String,
     createdById: Number,
 

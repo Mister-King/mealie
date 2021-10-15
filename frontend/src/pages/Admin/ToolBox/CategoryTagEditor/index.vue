@@ -28,7 +28,7 @@
           :slug="recipe.slug"
           :name="recipe.name"
           :description="recipe.description"
-          :rating="recipe.rating"
+          :ratings="JSON.parse(recipe.ratings)"
           :route="false"
           :tags="recipe.tags"
         />
