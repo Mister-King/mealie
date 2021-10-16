@@ -30,12 +30,24 @@ export default {
       default: false,
     },
   },
-  mounted() {
+  async mounted() {
+    const [response, error] = await api.recipes.requestDetails(this.slug);
+
+    if (error) console.log({ error });
+    const recipe = response.data;
+
+    this.updatedRatings = JSON.parse(recipe.ratings);
     this.rating = this.loggedIn ? this.getMyRating() : 0;
+
+    this.$root.$on(`updateRatings-${this.id}`, data => {
+      this.updatedRatings = data;
+      this.rating = this.getMyRating();
+    })
   },
   data() {
     return {
       rating: 0,
+      updatedRatings: this.ratings,
     };
   },
   computed: {
@@ -46,11 +58,11 @@ export default {
   methods: {
     getMyRating() {
 
-      if (!this.ratings || !this.ratings.length) {
+      if (!this.updatedRatings || !this.updatedRatings.length) {
         return 0;
       }
 
-      const myRating = this.ratings.find((rating => rating.userId === this.user.id))
+      const myRating = this.updatedRatings.find((rating => rating.userId === this.user.id))
       return myRating?.rating;
     },
     async updateRating(val) {
@@ -59,7 +71,6 @@ export default {
       const recipe = response.data;
 
       const updatedRatings = recipe?.ratings ? JSON.parse(recipe.ratings) : [];
-      // const updatedRatings = this.ratings || [];
 
       const myUserId = this.$store.getters.getUserData.id;
       const myRatingIndex = updatedRatings.findIndex((rating => rating.userId === myUserId))
