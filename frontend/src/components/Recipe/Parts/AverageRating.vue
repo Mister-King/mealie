@@ -37,7 +37,6 @@ export default {
     this.updatedRatings = JSON.parse(recipe.ratings);
 
     this.$root.$on(`updateRatings-${this.id}`, data => {
-      console.log(this.id, this.updatedRatings, data);
       this.updatedRatings = data;
     })
   },
