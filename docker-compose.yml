@@ -5,12 +5,11 @@ services:
       context: ./
       target: production
       dockerfile: Dockerfile
-    container_name: mealie
     restart: always
     depends_on:
       - "postgres"
     ports:
-      - 9090:80
+      - "9090:80"
     environment:
       DB_ENGINE: postgres # Optional: 'sqlite', 'postgres'
       POSTGRES_USER: mealie
@@ -21,8 +20,22 @@ services:
       # WORKERS_PER_CORE: 0.5
       # MAX_WORKERS: 8
       WEB_CONCURRENCY: 2
+
+      TZ: Europe/London
+
+      # Default Recipe Settings
+      RECIPE_SHOW_NUTRITION: 'true'
+      RECIPE_SHOW_ASSETS: 'true'
+      RECIPE_LANDSCAPE_VIEW: 'true'
+      RECIPE_DISABLE_COMMENTS: 'false'
+      RECIPE_DISABLE_AMOUNT: 'false'
+
+      API_DOCS: 'false'
+      DEFAULT_GROUP: 'Chefs'
+
+    volumes:
+      - ./data/:/app/data
   postgres:
-    container_name: postgres
     image: postgres
     restart: always
     environment:
