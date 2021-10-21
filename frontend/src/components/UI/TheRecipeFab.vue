@@ -126,14 +126,14 @@
         </template>
         <span>{{ $t("general.new") }}</span>
       </v-tooltip>
-      <v-tooltip left dark color="info">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn fab dark small color="info" v-bind="attrs" v-on="on" @click="openZipUploader">
-            <v-icon>{{ $globals.icons.zip }}</v-icon>
-          </v-btn>
-        </template>
-        <span>{{ $t("general.upload") }}</span>
-      </v-tooltip>
+<!--      <v-tooltip left dark color="info">-->
+<!--        <template v-slot:activator="{ on, attrs }">-->
+<!--          <v-btn fab dark small color="info" v-bind="attrs" v-on="on" @click="openZipUploader">-->
+<!--            <v-icon>{{ $globals.icons.zip }}</v-icon>-->
+<!--          </v-btn>-->
+<!--        </template>-->
+<!--        <span>{{ $t("general.upload") }}</span>-->
+<!--      </v-tooltip>-->
     </v-speed-dial>
   </div>
 </template>
